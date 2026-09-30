@@ -7,7 +7,7 @@ const { requireRole } = auth;
 
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB, these are small demo reports
+  limits: { fileSize: 4 * 1024 * 1024 }, // stay under Vercel's ~4.5MB request body limit
 });
 
 router.post(
