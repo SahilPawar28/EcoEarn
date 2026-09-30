@@ -1,4 +1,4 @@
 {
-  "network": "localhost",
-  "address": "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+  "network": "sepolia",
+  "address": "0x22c0C26Ce85C5916E5AcA17D7b2263f900C83102"
 }
