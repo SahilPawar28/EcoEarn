@@ -1,0 +1,77 @@
+body {
+  font-family: 'Candara', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url('/images/hero-image.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.signup-box {
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  text-align: center;
+  width: 500px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.signup-title {
+  font-family: 'Candara', sans-serif;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 30px;
+  color: #fff;
+}
+
+.input-field .MuiOutlinedInput-root {
+  height: 45px; /* ↓ reduce input height */
+  font-size: 14px;
+}
+
+.input-field .MuiInputBase-input {
+  padding: 10px 14px !important; /* ↓ less padding inside the input */
+  font-size: 14px;
+}
+
+.input-field label {
+  transform: translate(14px, -18px) scale(0.75); /* ⬆ moved label higher */
+  background: transparent !important;            /* 🚫 no box */
+  padding: 0;
+  color: white;                                   /* slightly darker for contrast */
+}
+
+.create-account-btn {
+  margin-top: 10px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: transparent;
+  color: #ffffff;
+  font-weight: 600;
+  border: 2px solid #ffffff;
+  transition: all 0.3s ease;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
+  
+}
+
+.create-account-btn:hover {
+  transform: scale(1.05);
+  background: #ffffff;
+  color: #000000; /* Optional: change text to black for contrast */
+  border-color: #ffffff;
+}
+
+
+

@@ -1,0 +1,17 @@
+/* Smooth Transition & Animations */
+.section {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+  }
+  
+  .fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .hidden {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  

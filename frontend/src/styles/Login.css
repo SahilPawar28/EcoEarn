@@ -1,0 +1,76 @@
+body {
+  font-family: 'Candara', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url('/images/hero-image.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+.login-box {
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  text-align: center;
+  width: 500px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  
+}
+
+.login-title {
+  font-family: 'Candara', sans-serif;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 30px;
+  color: #fff;
+}
+
+.input-field .MuiOutlinedInput-root {
+  height: 45px;
+  font-size: 14px;
+}
+
+.input-field .MuiInputBase-input {
+  padding: 10px 14px !important;
+  font-size: 14px;
+}
+
+.input-field label {
+  transform: translate(14px, -18px) scale(0.75);
+  background: transparent !important;
+  padding: 0;
+  color: white !important;
+}
+
+.login-btn.MuiButton-root {
+  margin-top: 10px !important;
+  padding: 12px 20px !important;
+  border-radius: 12px !important;
+  background: transparent !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  border: 2px solid #ffffff !important;
+  transition: all 0.3s ease !important;
+  font-size: 15px !important;
+  letter-spacing: 1px !important;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  cursor: pointer;
+}
+
+.login-btn.MuiButton-root:hover {
+  transform: scale(1.05) !important;
+  background: #ffffff !important;
+  color: #000000 !important; /* Optional: change text to black for contrast */
+  border-color: #ffffff !important ;
+}
+

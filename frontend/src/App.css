@@ -1,0 +1,82 @@
+
+/* ✅ Hero Section Styling */
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full-screen */
+  color: white;
+  text-align: center;
+  z-index: 1;
+  position: relative;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  animation: slideIn 1.5s ease-out;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+  animation: fadeIn 2s ease-in-out;
+}
+
+
+/* ✅ Background Image (Always Visible) */
+.animated-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('bg.jpg'); /* 🔥 Replace with actual image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -2;
+}
+
+/* ✅ Animated Overlay (Works in Both Modes) */
+.animated-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3); /* Adjust transparency */
+  z-index: -1;
+  animation: fadeIn 2s ease-in-out, gradientMove 8s infinite alternate;
+}
+
+/* ✅ Fix for Light & Dark Mode */
+.light-mode .animated-overlay {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .animated-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* ✅ Smooth fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ✅ Subtle gradient animation */
+@keyframes gradientMove {
+  0% {
+    background: rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    background: rgba(0, 0, 0, 5);
+  }
+}
