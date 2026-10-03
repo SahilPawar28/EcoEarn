@@ -1,20 +1,25 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState } from "react";
 import axios from "axios";
 import { API_BASE_URL } from "../config";
 
 // ✅ Create Auth Context
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-
-  // ✅ Load User from LocalStorage on Page Load
-  useEffect(() => {
+// Read any existing session synchronously so the very first render already
+// knows whether someone's logged in — reading this in a useEffect instead left
+// a brief window where `user` was null on a fresh page load, which made
+// PrivateRoute redirect to /login before the real session had a chance to load.
+const getStoredUser = () => {
+  try {
     const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+    return storedUser ? JSON.parse(storedUser) : null;
+  } catch {
+    return null;
+  }
+};
+
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(getStoredUser);
 
   // ✅ Login Function
   const login = async (email, password) => {

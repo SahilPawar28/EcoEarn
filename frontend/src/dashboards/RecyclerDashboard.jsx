@@ -7,7 +7,7 @@ import { useNotify } from "../context/NotificationContext";
 import DashboardHeader from "../components/DashboardHeader";
 import ActionCard from "../components/ActionCard";
 import api from "../api";
-import { MdOutlineAssignment, MdOutlineDescription, MdOutlineVisibility, MdOutlineBarChart, MdOutlineCardGiftcard } from "react-icons/md";
+import { MdOutlineAssignment, MdOutlineTaskAlt, MdOutlineDescription, MdOutlineVisibility, MdOutlineBarChart, MdOutlineCardGiftcard } from "react-icons/md";
 
 const RecyclerDashboard = () => {
   const navigate = useNavigate();
@@ -66,6 +66,12 @@ const RecyclerDashboard = () => {
       title: "View Pickups",
       description: "See scheduled waste pickups.",
       onClick: () => navigate("/recycler/scheduled-pickups"),
+    },
+    {
+      icon: <MdOutlineTaskAlt size={22} />,
+      title: "Confirm Pickup",
+      description: "Mark accepted pickups as completed.",
+      onClick: () => navigate("/recycler/confirm-pickup"),
     },
     {
       icon: <MdOutlineDescription size={22} />,

@@ -47,6 +47,18 @@ router.get("/scheduled", auth, requireRole("recycler", "collector"), async (req,
   }
 });
 
+// Pickups the current recycler/collector has accepted but not yet completed
+router.get("/accepted", auth, requireRole("recycler", "collector"), async (req, res) => {
+  try {
+    const pickups = await PickupRequest.find({ status: "accepted", handledBy: req.user.id })
+      .populate("user", "name email")
+      .sort({ updatedAt: -1 });
+    res.json(pickups);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching accepted pickups", error: error.message });
+  }
+});
+
 // Completed pickups (for the "track recycled material" view)
 router.get("/completed", auth, requireRole("recycler", "collector"), async (req, res) => {
   try {

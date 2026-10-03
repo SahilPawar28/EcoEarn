@@ -1,54 +1,100 @@
-import React, { useState } from "react";
-import { Container, TextField, Button, Typography, Paper, Box, CircularProgress } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Container, Card, CardContent, Typography, Button, Grid, Box, Chip } from "@mui/material";
 import api from "../../api";
 import { useNotify } from "../../context/NotificationContext";
-import { MdOutlineTaskAlt } from "react-icons/md";
-import { colors } from "../../theme";
+import PageLoader from "../../components/PageLoader";
+import EmptyState from "../../components/EmptyState";
+import { MdOutlineTaskAlt, MdOutlinePlace, MdOutlineCalendarToday, MdOutlinePerson } from "react-icons/md";
 
 const ConfirmPickup = () => {
-  const [pickupId, setPickupId] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [pickups, setPickups] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [actingId, setActingId] = useState(null);
   const notify = useNotify();
 
-  const confirmPickup = (e) => {
-    e.preventDefault();
-    if (!pickupId) {
-      notify("Enter a pickup ID.", "warning");
-      return;
-    }
+  const loadPickups = () => {
     setLoading(true);
     api
-      .post(`/api/pickups/${pickupId}/complete`)
-      .then(() => {
-        notify("Pickup marked as completed", "success");
-        setPickupId("");
-      })
-      .catch((err) => {
-        console.error(err);
-        notify("Failed to confirm pickup. Check the pickup ID.", "error");
-      })
+      .get("/api/pickups/accepted")
+      .then((res) => setPickups(res.data))
+      .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   };
 
+  useEffect(() => {
+    loadPickups();
+  }, []);
+
+  const completePickup = (id) => {
+    setActingId(id);
+    api
+      .post(`/api/pickups/${id}/complete`)
+      .then(() => {
+        setPickups((prev) => prev.filter((p) => p._id !== id));
+        notify("Pickup marked as completed", "success");
+      })
+      .catch((err) => {
+        console.error(err);
+        notify("Failed to confirm pickup", "error");
+      })
+      .finally(() => setActingId(null));
+  };
+
   return (
-    <Container maxWidth="sm" sx={{ py: 6 }}>
-      <Paper component="form" onSubmit={confirmPickup} elevation={0} sx={{ p: 4, borderRadius: 4, border: "1px solid", borderColor: "divider" }}>
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 1 }}>
-          <Box sx={{ width: 44, height: 44, borderRadius: 2.5, bgcolor: colors.tint, color: "primary.main", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <MdOutlineTaskAlt size={22} />
-          </Box>
-          <Typography variant="h5" fontWeight={700}>
-            Confirm Waste Pickup
-          </Typography>
-        </Box>
-        <Typography variant="body2" color="text.secondary" mb={3}>
-          Mark an accepted pickup as completed once collected.
-        </Typography>
-        <TextField label="Pickup ID" value={pickupId} onChange={(e) => setPickupId(e.target.value)} fullWidth margin="normal" />
-        <Button type="submit" variant="contained" size="large" fullWidth sx={{ mt: 2 }} disabled={loading}>
-          {loading ? <CircularProgress size={22} color="inherit" /> : "Confirm Pickup"}
-        </Button>
-      </Paper>
+    <Container maxWidth="lg" sx={{ py: 5 }}>
+      <Typography variant="h4" fontWeight={700} gutterBottom>
+        Confirm Waste Pickup
+      </Typography>
+      <Typography variant="body2" color="text.secondary" mb={4}>
+        Pickups you've accepted — mark them completed once collected.
+      </Typography>
+
+      {loading ? (
+        <PageLoader />
+      ) : pickups.length === 0 ? (
+        <EmptyState
+          icon={<MdOutlineTaskAlt size={40} />}
+          title="Nothing to confirm"
+          description="Accept a pickup first, then it'll show up here."
+        />
+      ) : (
+        <Grid container spacing={3}>
+          {pickups.map((pickup) => (
+            <Grid size={{ xs: 12, md: 6 }} key={pickup._id}>
+              <Card sx={{ borderRadius: 4, height: "100%" }}>
+                <CardContent sx={{ p: 3 }}>
+                  <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                    <Typography variant="h6" fontWeight={600}>
+                      {pickup.wasteType} Waste
+                    </Typography>
+                    <Chip label="accepted" color="info" size="small" />
+                  </Box>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1, mt: 1.5, color: "text.secondary" }}>
+                    <MdOutlinePlace size={16} />
+                    <Typography variant="body2">{pickup.address}</Typography>
+                  </Box>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1, mt: 0.5, color: "text.secondary" }}>
+                    <MdOutlineCalendarToday size={16} />
+                    <Typography variant="body2">{pickup.date}</Typography>
+                  </Box>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1, mt: 0.5, color: "text.secondary" }}>
+                    <MdOutlinePerson size={16} />
+                    <Typography variant="body2">{pickup.user?.name || "Unknown user"}</Typography>
+                  </Box>
+                  <Button
+                    variant="contained"
+                    sx={{ mt: 2.5 }}
+                    onClick={() => completePickup(pickup._id)}
+                    disabled={actingId === pickup._id}
+                  >
+                    {actingId === pickup._id ? "Confirming..." : "Confirm Pickup"}
+                  </Button>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </Container>
   );
 };
