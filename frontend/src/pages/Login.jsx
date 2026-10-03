@@ -14,7 +14,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useNotify } from "../context/NotificationContext";
-import { MdOutlineEmail, MdLockOutline, MdVisibility, MdVisibilityOff, MdEco } from "react-icons/md";
+import { MdOutlineEmail, MdLockOutline, MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { colors } from "../theme";
 
 const Login = () => {
@@ -71,7 +71,7 @@ const Login = () => {
         <Paper component="form" onSubmit={handleLogin} elevation={0} sx={{ p: 4, borderRadius: 4, border: "1px solid", borderColor: "divider" }}>
           <Box sx={{ display: "flex", justifyContent: "center", mb: 1 }}>
             <Box sx={{ width: 52, height: 52, borderRadius: "50%", bgcolor: colors.tint, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <MdEco size={26} color={colors.primary} />
+              <Box component="img" src="/logo.png" alt="EcoEarn" sx={{ height: 28 }} />
             </Box>
           </Box>
           <Typography variant="h5" fontWeight={700} align="center" gutterBottom>

@@ -2,7 +2,6 @@ import React from "react";
 import { Box, Container, Stack, Typography, Link as MuiLink } from "@mui/material";
 import { Link } from "react-router-dom";
 import { FiMail, FiPhone } from "react-icons/fi";
-import { MdEco } from "react-icons/md";
 
 const Footer = () => (
   <Box component="footer" sx={{ borderTop: "1px solid", borderColor: "divider", mt: "auto", py: 4 }}>
@@ -14,7 +13,7 @@ const Footer = () => (
         spacing={2}
       >
         <Stack direction="row" alignItems="center" spacing={1}>
-          <MdEco size={20} color="#1F7A3F" />
+          <Box component="img" src="/logo.png" alt="EcoEarn" sx={{ height: 22 }} />
           <Typography fontFamily="Poppins" fontWeight={600}>
             EcoEarn
           </Typography>

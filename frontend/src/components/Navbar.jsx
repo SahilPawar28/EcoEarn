@@ -20,7 +20,7 @@ import { useTheme } from "@mui/material/styles";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { colors } from "../theme";
-import { MdEco, MdOutlineDashboard, MdOutlineLogout, MdMenu, MdClose } from "react-icons/md";
+import { MdOutlineDashboard, MdOutlineLogout, MdMenu, MdClose } from "react-icons/md";
 import { FiInfo, FiBookOpen } from "react-icons/fi";
 
 const navLinks = [
@@ -106,7 +106,7 @@ const Navbar = () => {
           to="/"
           sx={{ display: "flex", alignItems: "center", gap: 1, textDecoration: "none", color: "inherit", flexGrow: 1 }}
         >
-          <MdEco size={26} color={theme.palette.primary.main} />
+          <Box component="img" src="/logo.png" alt="EcoEarn" sx={{ height: 28 }} />
           <Typography variant="h6" fontFamily="Poppins" fontWeight={700} color="text.primary">
             EcoEarn
           </Typography>
@@ -154,7 +154,7 @@ const Navbar = () => {
         <Box sx={{ width: 280, p: 2.5, display: "flex", flexDirection: "column", height: "100%" }}>
           <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 2 }}>
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <MdEco size={22} color={theme.palette.primary.main} />
+              <Box component="img" src="/logo.png" alt="EcoEarn" sx={{ height: 24 }} />
               <Typography fontFamily="Poppins" fontWeight={700}>
                 EcoEarn
               </Typography>
