@@ -1,8 +1,17 @@
-# ♻️ EcoEarn — Blockchain-Based Recycling Reward System
+# ♻️ EcoEarn — Blockchain-Integrated Recycling Reward System
 
-EcoEarn is a decentralised waste management and reward platform. Users schedule waste
-pickups, recyclers and collectors process them, and an ERC-20 token (`RCT`) on Ethereum
-rewards verified recycling — redeemable with partner retailers.
+EcoEarn is a waste management and reward platform with a blockchain-backed token
+layer. Users schedule waste pickups, recyclers and collectors process them, and an
+ERC-20 token (`RCT`) on Ethereum rewards verified recycling — redeemable with partner
+retailers. Accounts, pickups, and reports run on a conventional backend; the token
+itself, its minting/redemption rules, and the recycler/retailer allowlist live on-chain
+and are independently verifiable.
+
+## 🌐 Live Demo
+
+- Frontend: https://ecoearn-app.vercel.app
+- Backend API: https://ecoearn-backend-neon.vercel.app
+- Contract (Sepolia): [`0x22c0C26Ce85C5916E5AcA17D7b2263f900C83102`](https://sepolia.etherscan.io/address/0x22c0C26Ce85C5916E5AcA17D7b2263f900C83102)
 
 ## 🔑 Features
 
