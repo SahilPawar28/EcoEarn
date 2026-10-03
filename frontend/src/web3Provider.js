@@ -9,18 +9,12 @@ export const getProvider = () => {
 
 export const connectWallet = async () => {
   if (!window.ethereum) {
-    alert("MetaMask not detected. Please install it.");
-    return null;
+    throw new Error("MetaMask not detected. Please install it.");
   }
-  try {
-    await window.ethereum.request({ method: "eth_requestAccounts" });
-    const provider = getProvider();
-    signer = await provider.getSigner();
-    return signer;
-  } catch (error) {
-    console.error("Error connecting wallet:", error);
-    return null;
-  }
+  await window.ethereum.request({ method: "eth_requestAccounts" });
+  const provider = getProvider();
+  signer = await provider.getSigner();
+  return signer;
 };
 
 export const getSigner = async () => {
